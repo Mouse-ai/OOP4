@@ -13,7 +13,9 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(OOP4 main.cpp)
+add_executable(OOP4 main.cpp
+        Shape.cpp
+        Shape.h)
 target_link_libraries(OOP4
         Qt::Core
         Qt::Gui
