@@ -15,7 +15,11 @@ find_package(Qt6 COMPONENTS
 
 add_executable(OOP4 main.cpp
         Shape.cpp
-        Shape.h)
+        Shape.h
+        Ccircle.cpp
+        Ccircle.h
+        ShapeStorage.cpp
+        ShapeStorage.h)
 target_link_libraries(OOP4
         Qt::Core
         Qt::Gui
