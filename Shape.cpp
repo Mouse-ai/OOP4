@@ -16,3 +16,13 @@ void Shape:: toggleSelected() {
 void Shape::setColor(const QColor &newColor) {
     color = newColor;
 }
+void Shape::move(int dx, int dy, const QRect &bounds)
+{
+    QRect newRect = boundingRect().translated(dx, dy);
+
+    if (bounds.contains(newRect))
+    {
+        x += dx;
+        y += dy;
+    }
+}

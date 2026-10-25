@@ -7,6 +7,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setFocusPolicy(Qt::StrongFocus);
     setupActions();
+    QWidget *workArea = new QWidget(this);
+    workArea->setAttribute(Qt::WA_TransparentForMouseEvents);
+
+    setCentralWidget(workArea);
+}
+QRect MainWindow::getWorkAreaRect() const
+{
+    return centralWidget()->geometry();
 }
 void MainWindow::setupActions()
 {
@@ -121,5 +129,41 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         return;
     }
 
+    int dx = 0;
+    int dy = 0;
+
+    if (event->key() == Qt::Key_Left)
+    {
+        dx = -5;
+    }
+    else if (event->key() == Qt::Key_Right)
+    {
+        dx = 5;
+    }
+    else if (event->key() == Qt::Key_Up)
+    {
+        dy = -5;
+    }
+    else if (event->key() == Qt::Key_Down)
+    {
+        dy = 5;
+    }
+    if (dx != 0 || dy != 0)
+    {
+        QRect bounds = getWorkAreaRect();
+
+        for (int i = 0; i < storage.getCount(); i++)
+        {
+            Shape *shape = storage.getObject(i);
+
+            if (shape->isSelected())
+            {
+                shape->move(dx, dy, bounds);
+            }
+        }
+
+        update();
+        return;
+    }
     QMainWindow::keyPressEvent(event);
 }

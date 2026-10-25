@@ -9,7 +9,7 @@
 #include <QToolBar>
 #include <QMenuBar>
 #include "ShapeStorage.h"
-
+#include "QRect"
 class MainWindow : public QMainWindow
 {
 public:
@@ -27,6 +27,7 @@ protected:
 
 private:
     void setupActions();
+    QRect getWorkAreaRect() const;
     QAction *circleAction;
     QAction *rectangleAction;
     ShapeStorage storage;

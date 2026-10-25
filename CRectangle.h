@@ -15,6 +15,7 @@ public:
 
     bool contains(int pointX, int pointY) const override;
     void draw(QPainter &painter) const override;
+    QRect boundingRect() const override;
 };
 
 #endif

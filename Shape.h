@@ -3,6 +3,7 @@
 
 #include <QColor>
 #include <QPainter>
+#include <QRect>
 
 class Shape
 {
@@ -23,7 +24,9 @@ public:
     bool isSelected() const;
     void setSelected(bool value);
     void toggleSelected();
+    void move(int dx, int dy, const QRect &bounds);
 
+    virtual QRect boundingRect() const = 0;
     void setColor(const QColor &newColor);
 };
 

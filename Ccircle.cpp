@@ -31,3 +31,12 @@ void CCircle::draw(QPainter &painter) const
     );
     painter.restore();
 }
+QRect CCircle::boundingRect() const
+{
+    return QRect(
+        x - radius,
+        y - radius,
+        radius * 2,
+        radius * 2
+    );
+}

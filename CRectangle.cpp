@@ -37,3 +37,12 @@ void CRectangle::draw(QPainter &painter) const {
     );
     painter.restore();
 }
+QRect CRectangle::boundingRect() const
+{
+    return QRect(
+        x - width / 2,
+        y - height / 2,
+        width,
+        height
+    );
+}
