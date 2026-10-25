@@ -3,9 +3,28 @@
 #include "CRectangle.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent)
+    : QMainWindow(parent)
 {
     setFocusPolicy(Qt::StrongFocus);
+    setupActions();
+}
+void MainWindow::setupActions()
+{
+    circleAction = new QAction("Круг", this);
+    rectangleAction = new QAction("Прямоугольник", this);
+    connect(circleAction, &QAction::triggered, this, [this]()
+{
+    currentShapeType = ShapeType::Circle;
+});
+    connect(rectangleAction, &QAction::triggered, this, [this]() {
+        currentShapeType = ShapeType::Rectangle;
+    });
+    QMenu *shapeMenu = menuBar()->addMenu("Фигура");
+    shapeMenu->addAction(circleAction);
+    shapeMenu->addAction(rectangleAction);
+    QToolBar *toolBar = addToolBar("Фигуры");
+    toolBar->addAction(circleAction);
+    toolBar->addAction(rectangleAction);
 }
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
@@ -71,7 +90,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
-    QWidget::paintEvent(event);
+    QMainWindow::paintEvent(event);
 
     QPainter painter(this);
 
@@ -102,5 +121,5 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         return;
     }
 
-    QWidget::keyPressEvent(event);
+    QMainWindow::keyPressEvent(event);
 }

@@ -1,14 +1,16 @@
 #ifndef OOP4_MAINWINDOW_H
 #define OOP4_MAINWINDOW_H
 
-#include <QWidget>
+#include <QMainWindow>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QPaintEvent>
-
+#include <QAction>
+#include <QToolBar>
+#include <QMenuBar>
 #include "ShapeStorage.h"
 
-class MainWindow : public QWidget
+class MainWindow : public QMainWindow
 {
 public:
     enum class ShapeType
@@ -24,6 +26,9 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private:
+    void setupActions();
+    QAction *circleAction;
+    QAction *rectangleAction;
     ShapeStorage storage;
     ShapeType currentShapeType = ShapeType::Circle;
 
