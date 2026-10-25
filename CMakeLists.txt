@@ -19,7 +19,9 @@ add_executable(OOP4 main.cpp
         Ccircle.cpp
         Ccircle.h
         ShapeStorage.cpp
-        ShapeStorage.h)
+        ShapeStorage.h
+        MainWindow.cpp
+        MainWindow.h)
 target_link_libraries(OOP4
         Qt::Core
         Qt::Gui
