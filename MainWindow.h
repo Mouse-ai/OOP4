@@ -11,6 +11,11 @@
 class MainWindow : public QWidget
 {
 public:
+    enum class ShapeType
+    {
+        Circle,
+        Rectangle
+    };
     explicit MainWindow(QWidget *parent = nullptr);
 
 protected:
@@ -20,6 +25,8 @@ protected:
 
 private:
     ShapeStorage storage;
+    ShapeType currentShapeType = ShapeType::Circle;
+
 };
 
 #endif

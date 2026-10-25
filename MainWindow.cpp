@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "Ccircle.h"
+#include "CRectangle.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -46,7 +47,17 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
             storage.clearSelection();
         }
 
-        Shape *newShape = new CCircle(point.x(), point.y());
+
+        Shape *newShape = nullptr;
+
+        if (currentShapeType == ShapeType::Circle)
+        {
+            newShape = new CCircle(point.x(), point.y());
+        }
+        else if (currentShapeType == ShapeType::Rectangle)
+        {
+            newShape = new CRectangle(point.x(), point.y());
+        }
 
         if (ctrlPressed)
         {
@@ -77,6 +88,17 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         storage.removeSelected();
         update();
+        return;
+    }
+    if (event->key() == Qt::Key_1)
+    {
+        currentShapeType = ShapeType::Circle;
+        return;
+    }
+
+    if (event->key() == Qt::Key_2)
+    {
+        currentShapeType = ShapeType::Rectangle;
         return;
     }
 

@@ -15,13 +15,12 @@ void CCircle::draw(QPainter &painter) const
     if (selected)
     {
         pen.setColor(Qt::red);
-        pen.setWidth(3);
     }
     else
     {
         pen.setColor(color);
-        pen.setWidth(3);
     }
+    pen.setWidth(3);
 
     painter.setPen(pen);
     painter.drawEllipse(

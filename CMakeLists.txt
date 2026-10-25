@@ -21,7 +21,9 @@ add_executable(OOP4 main.cpp
         ShapeStorage.cpp
         ShapeStorage.h
         MainWindow.cpp
-        MainWindow.h)
+        MainWindow.h
+        CRectangle.cpp
+        CRectangle.h)
 target_link_libraries(OOP4
         Qt::Core
         Qt::Gui
