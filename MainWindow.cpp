@@ -2,6 +2,7 @@
 #include "Ccircle.h"
 #include "CRectangle.h"
 #include "CSquare.h"
+#include "CTriangle.h"
 #include <QColorDialog>
 #include <QActionGroup>
 MainWindow::MainWindow(QWidget *parent)
@@ -46,6 +47,10 @@ void MainWindow::setupActions()
     rectangleAction = new QAction("Прямоугольник", this);
     colorAction = new QAction("Цвет", this);
     squareAction = new QAction("Квадрат", this);
+    triangleAction = new QAction("Треугольник", this);
+    connect(triangleAction, &QAction::triggered, this, [this]() {
+        currentShapeType = ShapeType::Triangle;
+    });
 
     connect(squareAction, &QAction::triggered, this, [this]()
     {
@@ -66,6 +71,7 @@ void MainWindow::setupActions()
     shapeMenu->addAction(circleAction);
     shapeMenu->addAction(rectangleAction);
     shapeMenu->addAction(squareAction);
+    shapeMenu->addAction(triangleAction);
 
     QMenu *editMenu = menuBar()->addMenu("Редактирование");
     editMenu->addAction(colorAction);
@@ -73,16 +79,19 @@ void MainWindow::setupActions()
     toolBar->addAction(circleAction);
     toolBar->addAction(rectangleAction);
     toolBar->addAction(squareAction);
-
+    toolBar->addAction(triangleAction);
     toolBar->addAction(colorAction);
     circleAction->setCheckable(true);
     rectangleAction->setCheckable(true);
     squareAction->setCheckable(true);
+    triangleAction->setCheckable(true);
     QActionGroup *shapeGroup = new QActionGroup(this);
 
     shapeGroup->addAction(circleAction);
     shapeGroup->addAction(rectangleAction);
     shapeGroup->addAction(squareAction);
+    shapeGroup->addAction(triangleAction);
+
 
     shapeGroup->setExclusive(true);
 
@@ -140,6 +149,10 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         else if (currentShapeType == ShapeType::Square)
         {
             newShape = new CSquare(point.x(), point.y());
+        }
+        else if (currentShapeType == ShapeType::Triangle)
+        {
+            newShape = new CTriangle(point.x(), point.y());
         }
 
         if (newShape != nullptr) {
@@ -202,6 +215,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
         currentShapeType = ShapeType::Square;
         squareAction->setChecked(true);
+        return;
+    }
+    if (event->key() == Qt::Key_4)
+    {
+        currentShapeType = ShapeType::Triangle;
+        triangleAction->setChecked(true);
         return;
     }
 
