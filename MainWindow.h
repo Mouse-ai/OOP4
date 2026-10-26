@@ -19,7 +19,9 @@ public:
         Circle,
         Rectangle,
         Square,
-        Triangle
+        Triangle,
+        Ellipse,
+        Line
     };
     explicit MainWindow(QWidget *parent = nullptr);
 
@@ -38,6 +40,8 @@ private:
     QAction *colorAction;
     QAction *triangleAction;
     QAction *squareAction;
+    QAction *ellipseAction;
+    QAction *lineAction;
     ShapeStorage storage;
     ShapeType currentShapeType = ShapeType::Circle;
 

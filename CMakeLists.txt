@@ -27,7 +27,11 @@ add_executable(OOP4 main.cpp
         CSquare.cpp
         CSquare.h
         CTriangle.cpp
-        CTriangle.h)
+        CTriangle.h
+        CEllipse.cpp
+        CEllipse.h
+        CLine.cpp
+        CLine.h)
 target_link_libraries(OOP4
         Qt::Core
         Qt::Gui

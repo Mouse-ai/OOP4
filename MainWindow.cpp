@@ -5,6 +5,9 @@
 #include "CTriangle.h"
 #include <QColorDialog>
 #include <QActionGroup>
+#include "CEllipse.h"
+#include "CLine.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -48,6 +51,10 @@ void MainWindow::setupActions()
     colorAction = new QAction("Цвет", this);
     squareAction = new QAction("Квадрат", this);
     triangleAction = new QAction("Треугольник", this);
+    ellipseAction = new QAction("Эллипс", this);
+    lineAction = new QAction("Отрезок", this);
+
+
     connect(triangleAction, &QAction::triggered, this, [this]() {
         currentShapeType = ShapeType::Triangle;
     });
@@ -67,11 +74,23 @@ void MainWindow::setupActions()
     connect(rectangleAction, &QAction::triggered, this, [this]() {
         currentShapeType = ShapeType::Rectangle;
     });
+    connect(ellipseAction, &QAction::triggered, this, [this]()
+{
+    currentShapeType = ShapeType::Ellipse;
+});
+
+    connect(lineAction, &QAction::triggered, this, [this]()
+    {
+        currentShapeType = ShapeType::Line;
+    });
     QMenu *shapeMenu = menuBar()->addMenu("Фигура");
     shapeMenu->addAction(circleAction);
     shapeMenu->addAction(rectangleAction);
     shapeMenu->addAction(squareAction);
     shapeMenu->addAction(triangleAction);
+    shapeMenu->addAction(ellipseAction);
+    shapeMenu->addAction(lineAction);
+
 
     QMenu *editMenu = menuBar()->addMenu("Редактирование");
     editMenu->addAction(colorAction);
@@ -80,17 +99,26 @@ void MainWindow::setupActions()
     toolBar->addAction(rectangleAction);
     toolBar->addAction(squareAction);
     toolBar->addAction(triangleAction);
+
+    toolBar->addAction(ellipseAction);
+    toolBar->addAction(lineAction);
+
+
     toolBar->addAction(colorAction);
     circleAction->setCheckable(true);
     rectangleAction->setCheckable(true);
     squareAction->setCheckable(true);
     triangleAction->setCheckable(true);
+    ellipseAction->setCheckable(true);
+    lineAction->setCheckable(true);
     QActionGroup *shapeGroup = new QActionGroup(this);
 
     shapeGroup->addAction(circleAction);
     shapeGroup->addAction(rectangleAction);
     shapeGroup->addAction(squareAction);
     shapeGroup->addAction(triangleAction);
+    shapeGroup->addAction(ellipseAction);
+    shapeGroup->addAction(lineAction);
 
 
     shapeGroup->setExclusive(true);
@@ -153,6 +181,14 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         else if (currentShapeType == ShapeType::Triangle)
         {
             newShape = new CTriangle(point.x(), point.y());
+        }
+        else if (currentShapeType == ShapeType::Ellipse)
+        {
+            newShape = new CEllipse(point.x(), point.y());
+        }
+        else if (currentShapeType == ShapeType::Line)
+        {
+            newShape = new CLine(point.x(), point.y());
         }
 
         if (newShape != nullptr) {
@@ -221,6 +257,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         currentShapeType = ShapeType::Triangle;
         triangleAction->setChecked(true);
+        return;
+    }
+    if (event->key() == Qt::Key_5)
+    {
+        currentShapeType = ShapeType::Ellipse;
+        ellipseAction->setChecked(true);
+        return;
+    }
+
+    if (event->key() == Qt::Key_6)
+    {
+        currentShapeType = ShapeType::Line;
+        lineAction->setChecked(true);
         return;
     }
 
