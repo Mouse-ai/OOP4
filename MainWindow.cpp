@@ -3,6 +3,7 @@
 #include "CRectangle.h"
 #include "CSquare.h"
 #include <QColorDialog>
+#include <QActionGroup>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -74,8 +75,18 @@ void MainWindow::setupActions()
     toolBar->addAction(squareAction);
 
     toolBar->addAction(colorAction);
+    circleAction->setCheckable(true);
+    rectangleAction->setCheckable(true);
+    squareAction->setCheckable(true);
+    QActionGroup *shapeGroup = new QActionGroup(this);
 
+    shapeGroup->addAction(circleAction);
+    shapeGroup->addAction(rectangleAction);
+    shapeGroup->addAction(squareAction);
 
+    shapeGroup->setExclusive(true);
+
+    circleAction->setChecked(true);
 }
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
@@ -176,17 +187,21 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_1)
     {
         currentShapeType = ShapeType::Circle;
+        circleAction->setChecked(true);
         return;
     }
 
     if (event->key() == Qt::Key_2)
     {
         currentShapeType = ShapeType::Rectangle;
+        rectangleAction->setChecked(true);
         return;
     }
     if (event->key() == Qt::Key_3)
     {
+
         currentShapeType = ShapeType::Square;
+        squareAction->setChecked(true);
         return;
     }
 
