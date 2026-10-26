@@ -6,9 +6,12 @@
 
 class CRectangle : public Shape
 {
-private:
+protected:
     int width;
     int height;
+    bool canResize(int delta) const override;
+    void changeSize(int delta) override;
+    CRectangle(int x, int y, int width, int height);
 
 public:
     CRectangle(int x, int y);
@@ -16,8 +19,7 @@ public:
     bool contains(int pointX, int pointY) const override;
     void draw(QPainter &painter) const override;
     QRect boundingRect() const override;
-    bool canResize(int delta) const override;
-    void changeSize(int delta) override;
+
 };
 
 #endif

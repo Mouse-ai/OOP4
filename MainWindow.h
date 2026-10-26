@@ -16,7 +16,8 @@ public:
     enum class ShapeType
     {
         Circle,
-        Rectangle
+        Rectangle,
+        Square
     };
     explicit MainWindow(QWidget *parent = nullptr);
 
@@ -32,6 +33,7 @@ private:
     QAction *circleAction;
     QAction *rectangleAction;
     QAction *colorAction;
+    QAction *squareAction;
     ShapeStorage storage;
     ShapeType currentShapeType = ShapeType::Circle;
 

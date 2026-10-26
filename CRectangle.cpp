@@ -4,9 +4,14 @@
 
 #include "CRectangle.h"
 CRectangle::CRectangle(int x, int y)
-    : Shape(x, y), width(80), height(50)
+    : CRectangle(x, y, 80, 50)
 {
 }
+
+CRectangle::CRectangle(int x, int y, int width, int height): Shape(x, y), width(width), height(height) {
+
+}
+
 bool CRectangle::contains(int pointX, int pointY) const {
     int left = x -width/2;
     int right = x + width/2;

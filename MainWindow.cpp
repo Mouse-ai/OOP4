@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "Ccircle.h"
 #include "CRectangle.h"
+#include "CSquare.h"
 #include <QColorDialog>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -43,7 +44,12 @@ void MainWindow::setupActions()
     circleAction = new QAction("Круг", this);
     rectangleAction = new QAction("Прямоугольник", this);
     colorAction = new QAction("Цвет", this);
+    squareAction = new QAction("Квадрат", this);
 
+    connect(squareAction, &QAction::triggered, this, [this]()
+    {
+        currentShapeType = ShapeType::Square;
+    });
     connect(colorAction, &QAction::triggered, this, [this]()
     {
         changeSelectedColor();
@@ -58,12 +64,18 @@ void MainWindow::setupActions()
     QMenu *shapeMenu = menuBar()->addMenu("Фигура");
     shapeMenu->addAction(circleAction);
     shapeMenu->addAction(rectangleAction);
+    shapeMenu->addAction(squareAction);
+
     QMenu *editMenu = menuBar()->addMenu("Редактирование");
     editMenu->addAction(colorAction);
     QToolBar *toolBar = addToolBar("Фигуры");
     toolBar->addAction(circleAction);
     toolBar->addAction(rectangleAction);
+    toolBar->addAction(squareAction);
+
     toolBar->addAction(colorAction);
+
+
 }
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
@@ -113,6 +125,10 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         else if (currentShapeType == ShapeType::Rectangle)
         {
             newShape = new CRectangle(point.x(), point.y());
+        }
+        else if (currentShapeType == ShapeType::Square)
+        {
+            newShape = new CSquare(point.x(), point.y());
         }
 
         if (newShape != nullptr) {
@@ -168,6 +184,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         currentShapeType = ShapeType::Rectangle;
         return;
     }
+    if (event->key() == Qt::Key_3)
+    {
+        currentShapeType = ShapeType::Square;
+        return;
+    }
+
 
     int dx = 0;
     int dy = 0;

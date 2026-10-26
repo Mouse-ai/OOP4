@@ -23,7 +23,9 @@ add_executable(OOP4 main.cpp
         MainWindow.cpp
         MainWindow.h
         CRectangle.cpp
-        CRectangle.h)
+        CRectangle.h
+        CSquare.cpp
+        CSquare.h)
 target_link_libraries(OOP4
         Qt::Core
         Qt::Gui
