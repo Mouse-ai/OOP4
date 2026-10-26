@@ -12,6 +12,8 @@ protected:
     int y;
     QColor color;
     bool selected;
+    virtual bool canResize(int delta) const = 0;
+    virtual void changeSize(int delta) = 0;
 
 public:
     Shape(int x, int y);
@@ -28,6 +30,8 @@ public:
 
     virtual QRect boundingRect() const = 0;
     void setColor(const QColor &newColor);
+    void resize(int delta, const QRect &bounds);
+    bool fitsInBounds(const QRect &bounds) const;
 };
 
 #endif

@@ -6,12 +6,14 @@
 
 class CCircle:public Shape {
 private:
-    static constexpr int radius = 30;
+    int radius = 30;
 public:
-    CCircle(int x, int y): Shape(x, y) {};
+    CCircle(int x, int y): Shape(x, y),radius(30) {};
     bool contains(int pointx, int pointy) const override;
     void draw(QPainter &painter) const override;
     QRect boundingRect() const override;
+    bool canResize(int delta) const override;
+    void changeSize(int delta) override;
 };
 
 

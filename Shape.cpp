@@ -18,11 +18,30 @@ void Shape::setColor(const QColor &newColor) {
 }
 void Shape::move(int dx, int dy, const QRect &bounds)
 {
-    QRect newRect = boundingRect().translated(dx, dy);
+    x += dx;
+    y += dy;
 
-    if (bounds.contains(newRect))
+    if (!fitsInBounds(bounds))
     {
-        x += dx;
-        y += dy;
+        x -= dx;
+        y -= dy;
     }
+}
+void Shape::resize(int delta, const QRect &bounds)
+{
+    if (!canResize(delta))
+    {
+        return;
+    }
+
+    changeSize(delta);
+
+    if (!fitsInBounds(bounds))
+    {
+        changeSize(-delta);
+    }
+}
+bool Shape::fitsInBounds(const QRect &bounds) const
+{
+    return bounds.contains(boundingRect());
 }

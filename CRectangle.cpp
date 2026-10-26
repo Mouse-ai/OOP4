@@ -46,3 +46,14 @@ QRect CRectangle::boundingRect() const
         height
     );
 }
+bool CRectangle::canResize(int delta) const
+{
+    return width + delta >= 20 &&
+           height + delta >= 20;
+}
+
+void CRectangle::changeSize(int delta)
+{
+    width += delta;
+    height += delta;
+}

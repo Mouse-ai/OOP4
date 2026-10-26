@@ -28,8 +28,10 @@ protected:
 private:
     void setupActions();
     QRect getWorkAreaRect() const;
+    void changeSelectedColor();
     QAction *circleAction;
     QAction *rectangleAction;
+    QAction *colorAction;
     ShapeStorage storage;
     ShapeType currentShapeType = ShapeType::Circle;
 

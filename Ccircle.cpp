@@ -40,3 +40,12 @@ QRect CCircle::boundingRect() const
         radius * 2
     );
 }
+bool CCircle::canResize(int delta) const
+{
+    return radius + delta >= 10;
+}
+
+void CCircle::changeSize(int delta)
+{
+    radius += delta;
+}
