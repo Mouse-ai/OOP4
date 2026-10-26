@@ -11,7 +11,8 @@ CTriangle::CTriangle(int x, int y)
 QPolygon CTriangle::getPolygon() const
 {
     QPolygon polygon;
-
+    // Формируем вершины из центра и текущего размера.
+    // Этот же полигон используется для рисования и проверки попадания.
     polygon << QPoint(x, y - height / 2)
             << QPoint(x - width / 2, y + height / 2)
             << QPoint(x + width / 2, y + height / 2);

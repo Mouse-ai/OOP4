@@ -295,3 +295,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
     QMainWindow::keyPressEvent(event);
 }
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    QMainWindow::resizeEvent(event);
+
+    
+    update();
+}

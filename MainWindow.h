@@ -9,7 +9,8 @@
 #include <QToolBar>
 #include <QMenuBar>
 #include "ShapeStorage.h"
-#include "QRect"
+#include <QRect>
+#include <QResizeEvent>
 class MainWindow : public QMainWindow
 {
 public:
@@ -26,6 +27,7 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     void setupActions();
